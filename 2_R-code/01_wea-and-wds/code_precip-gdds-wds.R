@@ -1,22 +1,18 @@
-#--summarise weather
-#--april 7 2021
+# author: gina nichols (virginia.nichols@gmail.com)
+# purpose: summarise raw weather data
+# created: april 7 2021
 # updated feb 18 2022
 # updated 7/21/2022, added wds processing 
-# 9/9/2022 adding GDDS 'chance'
+# updated 9/9/2022 adding GDDS 'chance'
 
 
 # setup -------------------------------------------------------------------
 
 
-#--getting the path of your current open file
-current_path = rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path))
-curdir <- paste(getwd())
-
 rm(list = ls())
 library(tidyverse)
 library(lubridate)
-library(saapsim)
+library(saapsim) #--bespoke function to get doy from date and vice versa
 #devtools::install_github("vanichols/saapsim")
 library(readxl)
 library(patchwork)
@@ -34,13 +30,12 @@ library(scales)
 # weather -----------------------------------------------------------------
 
 wea <- 
-      read_excel("../01_wea-and-wds/raw_ames-wea.xlsx") %>% 
+      read_excel("2_R-code/01_wea-and-wds/raw_ames-wea.xlsx") %>% 
   filter(year > 1988) 
 
 max(wea)
 
 # fall precip - sum ---------------------------------------------------------------
-
 
 #--sum precip, chance over 1/2 inch? basically 100%...
 prcp_oct <- 
@@ -212,7 +207,7 @@ gdd_probs %>%
 # workable days -----------------------------------------------------------
 
 wd_dat <- 
-  read_csv("dat_workable-days.csv") %>% 
+  read_csv("2_R-code/01_wea-and-wds/dat_workable-days.csv") %>% 
   mutate(two_or_more = ifelse(days_tot >= 2, "yes", "no"),
          four_or_more= ifelse(days_tot >= 4, "yes", "no"))
 

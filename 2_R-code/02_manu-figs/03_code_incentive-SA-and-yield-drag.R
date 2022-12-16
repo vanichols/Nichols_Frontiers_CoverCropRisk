@@ -5,11 +5,6 @@
 # setup -------------------------------------------------------------------
 
 
-#--getting the path of your current open file
-current_path = rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path))
-curdir <- paste(getwd())
-
 rm(list = ls())
 
 library(tidyverse)
@@ -25,7 +20,7 @@ library(scales)
 library(ggthemes)
 library(ggpubr)
 
-source("code_palettes.R")
+source("2_R-code/02_manu-figs/code_palettes.R")
 
 theme_set(theme_bw())
 
@@ -47,14 +42,14 @@ my_lab2 <- (expression("Value of cost share or incentive ($ "~ha^-1~")"))
 
 # data --------------------------------------------------------------------
 
-dcorn <- read_excel("../../1_decision-analysis-workbooks/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
+dcorn <- read_excel("1_Decision-analysis-workbook/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
            sheet = "Maize-no-societal-benefits-SA",
            skip = 5) %>% 
   select(54:58) %>%
   clean_names()
 
 
-dsoy <- read_excel("../../1_decision-analysis-workbooks/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
+dsoy <- read_excel("1_Decision-analysis-workbook/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
                     sheet = "Soy-no-societal-benefits-SA",
                     skip = 5) %>% 
   select(56:60) %>%
@@ -92,7 +87,7 @@ dat %>%
   pivot_wider(names_from = rye_dec_nice, values_from = value_ha)
 
 
-#--these are eyeballed from the SA excel
+#--these are eyeballed from Excel sheet
 dummy <- 
   tibble(scenario = c("Rye - Maize", "Rye - Soybean"),
          value_ha = c(1044, 600),
@@ -168,7 +163,7 @@ my_xlab2 <- (expression("Value of cost share or incentive ($ "~ha^-1~")"))
 
 
 ddrag <- 
-  read_excel("../../1_decision-analysis-workbooks/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
+  read_excel("1_Decision-analysis-workbook/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
              sheet = "Maize-yield-drag-SA",
              skip = 5) %>% 
   select(54:58) %>%
@@ -233,5 +228,5 @@ fig_inc / fig_drag +
   plot_layout(guides = 'collect')  & theme(legend.position = 'top') 
 
 
-ggsave("../../6_submissions/Second-submission/Figure3.png",  width = 6, height = 7)
+ggsave("2_R-code/02_manu-figs/Figure3.png",  width = 6, height = 7)
 

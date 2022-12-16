@@ -5,12 +5,6 @@
 
 # setup -------------------------------------------------------------------
 
-
-#--getting the path of your current open file
-current_path = rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path))
-curdir <- paste(getwd())
-
 rm(list = ls())
 
 library(tidyverse)
@@ -26,7 +20,7 @@ library(scales)
 library(ggthemes)
 library(ggpubr)
 
-source("code_palettes.R")
+source("2_R-code/02_manu-figs/code_palettes.R")
 
 theme_set(theme_bw())
 
@@ -49,7 +43,7 @@ my_ylab <- (expression("Value of decision ($ "~ha^-1~")"))
 
 #--if you plant a cover crop but get no money for it
 dcorn_cc <- 
-  read_excel("../../1_decision-analysis-workbooks/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
+  read_excel("1_Decision-analysis-workbook/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
            sheet = "Maize-no-societal-benefits-SA",
            skip = 5) %>% 
   select(11:12) %>%
@@ -65,7 +59,7 @@ dcorn_cc <-
 
 #--if you don't
 dcorn_no <- 
-  read_excel("../../1_decision-analysis-workbooks/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
+  read_excel("1_Decision-analysis-workbook/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
              sheet = "Maize-no-societal-benefits-SA",
              skip = 5) %>% 
   select(2:3) %>%
@@ -79,8 +73,8 @@ dcorn_no <-
 
 
 dsoy_cc <- 
-  read_excel("../../1_decision-analysis-workbooks/UPDATED_cover-crop-decision-tree-raw-100 GDDs.xlsx",
-             sheet = "Soy-moral-hazard",
+  read_excel("1_Decision-analysis-workbook/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
+             sheet = "Soy-no-societal-benefits-SA",
              skip = 5) %>% 
   select(11:12) %>%
   clean_names() %>% 
@@ -94,8 +88,8 @@ dsoy_cc <-
          decision_id = c("5", "6", "5/6"))
 
 dsoy_no <- 
-  read_excel("../../1_decision-analysis-workbooks/UPDATED_cover-crop-decision-tree-raw-100 GDDs.xlsx",
-             sheet = "Soy-moral-hazard",
+  read_excel("1_Decision-analysis-workbook/UPDATED_cover-crop-decision-tree-raw-100 GDDs - 50pct.xlsx",
+             sheet = "Soy-no-societal-benefits-SA",
              skip = 5) %>% 
   select(2:3) %>%
   clean_names() %>% 
@@ -158,11 +152,6 @@ dat %>%
   facet_grid(scenario~.)
 
 
-
-#ggsave("../../6_submissions/Second-submission/Figure2.png", width = 6.1, height = 4.5)
-
-
-
 # lollipop ----------------------------------------------------------------
 
 dat2 <- 
@@ -218,4 +207,4 @@ dat2 %>%
 
 
 
-ggsave("../../6_submissions/Second-submission/Figure2.png", width = 6, height = 4.5)
+ggsave("2_R-code/02_manu-figs/Figure2.png", width = 6, height = 4.5)

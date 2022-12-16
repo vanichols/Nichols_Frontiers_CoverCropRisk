@@ -1,17 +1,12 @@
-#--summarise weather
+#--make weather figs
 #--april 7 2021
 # updated feb 18 2022
 # updated sept 9
-
+# updated dec 15 2022
 
 
 # setup -------------------------------------------------------------------
 
-
-#--getting the path of your current open file
-current_path = rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path))
-curdir <- paste(getwd())
 
 rm(list = ls())
 library(tidyverse)
@@ -25,7 +20,7 @@ library(ggthemes)
 library(ggpubr)
 library(patchwork)
 
-source("code_palettes.R")
+source("2_R-code/02_manu-figs/code_palettes.R")
 
 theme_set(theme_bw())
 
@@ -45,7 +40,7 @@ mytheme <-
 
 # precip vs chance --------------------------------------------------------
 
-prcp_chance <- read_csv("../01_wea-and-wds/dat_precip-chance-fxn-rqd.csv")
+prcp_chance <- read_csv("2_R-code/01_wea-and-wds/dat_precip-chance-fxn-rqd.csv")
 
 prcp_chance %>% 
   filter(grepl("oct", month)) %>% 
@@ -72,7 +67,7 @@ f1
 # gdds vs chance --------------------------------------------------------
 
 
-gdds_chance <- read_csv("../01_wea-and-wds/dat_gdds-chance-fxn-rqd.csv")
+gdds_chance <- read_csv("2_R-code/01_wea-and-wds/dat_gdds-chance-fxn-rqd.csv")
 
 gdds_chance %>% 
   filter(gdds_req == 100)
@@ -98,4 +93,4 @@ f1 / f2 +
   plot_layout(guides = 'collect')  & theme(legend.position = 'top') 
 
 
-ggsave("../../6_submissions/Second-submission/Figure4.png", width = 5, height = 6.7)
+ggsave("2_R-code/02_manu-figs/Figure4.png", width = 5, height = 6.7)
