@@ -64,7 +64,7 @@ prcp <-
     prcp_nov %>% select(year, month, fall_precip_in)
   ) 
 
-prcp %>% write_csv("dat_fall-precip.csv")
+prcp %>% write_csv("2_R-code/01_wea-and-wds/dat_fall-precip.csv")
 
 
 
@@ -91,7 +91,7 @@ prcp_chance <-
   ungroup() %>% 
   select(month, chance_halfin)
 
-prcp_chance %>% write_csv("dat_chance-fall-precip.csv")
+prcp_chance %>% write_csv("2_R-code/01_wea-and-wds/dat_chance-fall-precip.csv")
 
 
 
@@ -122,7 +122,7 @@ for (i in seq(from = 0.1, to = 3.5, by = 0.05)) {
 }
 
 prcp_probs %>% 
-  write_csv("dat_precip-chance-fxn-rqd.csv")
+  write_csv("2_R-code/01_wea-and-wds/dat_precip-chance-fxn-rqd.csv")
 
 
 # gdd ---------------------------------------------------------------------
@@ -155,7 +155,7 @@ gdds <-
   bind_rows(gdd_nov)
 
 gdds %>%
-  write_csv("dat_200gdds.csv")
+  write_csv("2_R-code/01_wea-and-wds/dat_200gdds.csv")
 
 chance_gdds <- 
   gdds %>% 
@@ -171,7 +171,7 @@ chance_gdds <-
 
 
 chance_gdds %>%
-  write_csv("dat_chance-200gdds.csv")
+  write_csv("2_R-code/01_wea-and-wds/dat_chance-200gdds.csv")
 
 # fall precip - chance as function of precip needed ----------------------------------------------------
 
@@ -199,7 +199,7 @@ for (i in seq(from = 50, to = 300, by = 5)) {
 }
 
 gdd_probs %>% 
-  write_csv("dat_gdds-chance-fxn-rqd.csv")
+  write_csv("2_R-code/01_wea-and-wds/dat_gdds-chance-fxn-rqd.csv")
 
 
 
@@ -245,7 +245,7 @@ chance_wd <-
   arrange(cat2) 
 
 chance_wd %>% 
-  write_csv("dat_chance-wd.csv")
+  write_csv("2_R-code/01_wea-and-wds/dat_chance-wd.csv")
 
 
 
