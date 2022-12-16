@@ -1,0 +1,7 @@
+dkbl <- "#2d2d8a"
+grn <- "#00b050"
+ylw <- "#EEB422"
+pnk <- "#cc0099"
+ltbl <- "#daedef"
+ltgrn <- "#7CCD7C"
+dkgrn <- "#006400"
