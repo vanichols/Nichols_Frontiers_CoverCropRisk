@@ -198,13 +198,17 @@ dat2 %>%
   scale_y_continuous(labels = label_dollar(), limits = c(0, 1400)) +
   labs(x = NULL,
        y = my_ylab) +
-  theme_clean() +
+  #theme_clean() +
   theme(axis.title = element_text(size = rel(1.2)),
         axis.text.x = element_text(size = rel(1.2)),
         #axis.title.y = element_text(angle = 0, vjust = 0.5),
-        strip.text.x = element_text(size = rel(1.5))) + 
+        strip.text.x = element_text(size = rel(1.5)),
+        strip.background = element_rect(fill = "gray90"),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank()) + 
   facet_grid(scenario~.)
 
 
 
-ggsave("2_R-code/02_manu-figs/Figure2.png", width = 6, height = 4.5)
+ggsave("2_R-code/02_manu-figs/Figure2.jpg", width = 6, height = 4.5)
+ggsave("4_temp/Second-submission/Figure2.jpg", width = 6, height = 4.5)
