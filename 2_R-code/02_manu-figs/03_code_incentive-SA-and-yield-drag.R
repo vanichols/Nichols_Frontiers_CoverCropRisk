@@ -138,14 +138,15 @@ fig_inc <-
   scale_color_manual(values = c(ylw, grn)) +
   scale_x_continuous(labels = label_dollar()) +
   scale_y_continuous(labels = label_dollar(), limits = c(400, 1400)) +
-  theme_clean() +
+  #theme_clean() +
   theme(
     axis.title = element_text(size = rel(1)),
     #axis.title.y = element_text(angle = 0, vjust = 0.5),
     strip.text.x = element_text(size = rel(1.1)),
     #        legend.justification = c(1, 1),
     legend.position = "top",
-    legend.background = element_rect(color = NULL)
+    strip.background = element_rect(fill = "gray90"),
+    legend.background = element_rect(color = NA)
   ) +
   labs(x = my_lab2,
        y = my_lab1,
@@ -193,7 +194,8 @@ fig_drag <-
     rye_dec_nice = ifelse(name == "plant_cover_crop",
                           "Plant rye",
                           "Do not plant rye"),
-    yield_drag = 1 - pct_total_yield_14_days
+    yield_drag = 1 - pct_total_yield_14_days,
+    scenario = "Rye - Maize",
   ) %>%
   filter(yield_drag < 0.3) %>%
   ggplot(aes(yield_drag, value_ha)) +
@@ -207,20 +209,22 @@ fig_drag <-
   scale_color_manual(values = c(ylw, grn)) +
   scale_x_continuous(labels = label_percent()) +
   scale_y_continuous(labels = label_dollar(), limits = c(900, 1090)) +
-  theme_clean() +
+  #theme_clean() +
   theme(
     axis.title = element_text(size = rel(1)),
     #axis.title.y = element_text(angle = 0, vjust = 0.5),
     strip.text.x = element_text(size = rel(1.1)),
+    strip.background = element_rect(fill = "gray90"),
     #        legend.justification = c(1, 1),
     legend.position = "top",
-    legend.background = element_rect(color = NULL)
+    legend.background = element_rect(color = NA)
   ) +
+  facet_grid(.~scenario) +
   labs(x = "Relative reduction in maize yields caused by\nplanting <14 days after cover crop termination\n(50% chance)",
        y = my_ylab2,
        color = NULL)
 
-
+fig_drag
 
 # together ----------------------------------------------------------------
 
@@ -228,5 +232,5 @@ fig_inc / fig_drag +
   plot_layout(guides = 'collect')  & theme(legend.position = 'top') 
 
 
-ggsave("2_R-code/02_manu-figs/Figure3.png",  width = 6, height = 7)
-
+ggsave("2_R-code/02_manu-figs/Figure3.jpg",  width = 6, height = 7)
+ggsave("4_temp/Second-submission/Figure3.jpg",  width = 6, height = 7)
