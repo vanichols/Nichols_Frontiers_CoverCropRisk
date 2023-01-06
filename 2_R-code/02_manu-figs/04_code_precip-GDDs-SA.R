@@ -93,4 +93,5 @@ f1 / f2 +
   plot_layout(guides = 'collect')  & theme(legend.position = 'top') 
 
 
-ggsave("2_R-code/02_manu-figs/Figure4.png", width = 5, height = 6.7)
+ggsave("2_R-code/02_manu-figs/Figure4.jpg", width = 5, height = 6.7)
+ggsave("4_temp/Second-submission/Figure4.jpg", width = 5, height = 6.7)
